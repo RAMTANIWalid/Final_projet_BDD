@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='manager.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
+    <style>
+        .store {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            color: white;
+        }
+    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=arrow_forward" />
+    <title>Store Information</title>
+</head>
+<body>
+    
+    <nav id="nav_bar">
+        <div id="container_logoprof">
+            <a href="{{url_for("client")}}">
+                <div id="magasin">
+                    <img src="{{ url_for('static', filename='MSI-Logo.png') }}" width="200" height="100" alt="MSI Logo" />
+                </div>
+            </a>
+        </div>
+        <form id="search_div" action='/search_product_magasin' method='GET'>
+            <input type="text" placeholder="Search for products..." name="product" id="product" />
+        </form>
+        <a href="/client_personnelle" id="profile_normal">
+                <div id="profile">
+                    <img src="{{ url_for('static', filename='client.png') }}" width="50" height="50" alt="Profile" />
+                </div>
+        </a>
+    </nav>
+    
+    
+    <div id="container1" class="store">
+        <h2>client Information</h2>
+        <form id="myform1" action="/client_update" method="POST">
+            <div id="email_container">
+                <input type="hidden" id="idEmp" name="idEmp" placeholder="Name" value="{{ session['user'][0] }}" required>
+            </div>
+            <div id="email_container">
+                <label for="nomMag">client Name</label>
+                <input type="text" id="nomMag" name="nomEmp" placeholder="Name" value="{{ session['user'][1] }}" required>
+            </div>
+
+            <div id="email_container">
+                <label for="nomMag">client Firstname</label>
+                <input type="text" id="nomMag" name="prenomEmp" placeholder="Name" value="{{ session['user'][2] }}" required>
+            </div>
+            <div id="email_container">
+                <label for="adresseMag">client Address</label>
+                <input type="text" id="adresseMag" name="mailEmp" placeholder="Address" value="{{ session['user'][3] }}" required>
+            </div>
+            <div id="email_container">
+                <label for="telMag">client Telephone</label>
+                <input type="tel" id="telMag" name="telEmp" placeholder="Tel" value="{{ session['user'][4][1:] }}" required >
+            </div>
+            <button type="submit" id="button_login">Update</button>
+        </form>
+    </div>
+    <section>
+        <a id='button_login' href='/logout'>
+            Log out
+        </a>
+    </section>
+</body>
+</html>

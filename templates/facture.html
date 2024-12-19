@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='manager.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700&display=swap" rel="stylesheet">
+    <title>Manager</title>
+</head>
+<body>
+    <nav id="nav_bar">
+        <div id="container_logoprof">
+            <a href="{{url_for("employe")}}">
+                <div id="magasin">
+                    <img src="{{ url_for('static', filename='MSI-Logo.png') }}" width="200" height="100" alt="MSI Logo" />
+                </div>
+            </a>
+        </div>
+        <a href="{{ url_for('employe_personelle') }}" id="profile_normal">
+                <div id="profile">
+                    <img src="{{ url_for('static', filename='MSI-Logo.png') }}" width="50" height="50" alt="Profile" />
+                </div>
+            </a>
+        </div>
+    </nav>
+    <main>
+        <h1 style="font-size: 2.5em; font-weight: bold; color: navy;">Facture : </h1>
+        
+        <div class="product-grid">
+            {% for composant in composants %}
+            <a href="/factureproduct_{{composant[0]}}_{{idfact}}">
+                <div class="product-card">
+                    <img src="{{ url_for('static', filename='keyboard.webp') }}" alt="Product image" />
+                    <h3>{{ composant[1] }}</h3>
+                    <p class="price_composant">${{ composant[3] }}</p>
+                    <p class="stock_composant">Quantity: {{ composant[2] }}</p>
+                </div>
+            </a>
+            {% endfor %}
+        </div>
+        
+        {% if not composants %}
+        <h1>No product available</h1>
+        <h1 style="font-size: 2.5em; font-weight: bold; color: navy;">List of Shops</h1>
+        {% endif %}
+    </main>
+    
+    <div id="container1">
+        <form class="addcomposant_form" action="/add_composantfacture" method="POST">
+            <h1>Add composant</h1>
+            <label for="i"></label>
+            <input type="number" name="quantite" value="" id='i' placeholder=1>    
+            <input type="hidden" name="idFact" value={{idfact}} id='i' placeholder=1>
+            <select name="idComp" id="email_container" required>
+                <option value="" disabled selected>Select a client</option>
+                {%for p in product_choice%}
+                <option value={{p.idcomp}}>{{p.nomcomp}}</option>
+                {%endfor%}
+            </select>
+            <button type="submit" id="button_login">Create</button>
+        </form>
+    </div>
+</body>
+</html>

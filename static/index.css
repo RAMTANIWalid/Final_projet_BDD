@@ -1,0 +1,177 @@
+body{
+    overflow-x: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    box-sizing: border-box;
+    font-family: "Roboto", sans-serif;
+    background-image: url('bg.jpg');
+    background-size: cover;
+    background-clip: border-box;
+}
+#container{
+    opacity: 0;
+    width: 50%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+    background: transparent;
+    backdrop-filter: blur(15px);
+    box-shadow: -3px -3px 2px rgba(29, 27, 27, 0.5);
+}
+
+#container1{
+    opacity: 1;
+    width: 80%;
+    margin: 15px auto;
+    padding-bottom: 15px;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+    background: transparent;
+    backdrop-filter: blur(15px);
+    box-shadow: -3px -3px 2px rgba(29, 27, 27, 0.5);
+}
+#login_title{
+    color: white;
+    font-weight: bold;
+    font-size: xx-large;
+    text-align: center;
+}
+#myform, #myform1{
+    width: 60%;
+}
+#username_container, #password_container, #confirm_password_container, #email_container{
+    width: 100%;
+    height: 100%;
+    position: relative;
+    padding: 5px 3px;
+    box-sizing: border-box;
+}
+#username_container, #confirm_password_container, #email_container{
+    margin-bottom: 7px;
+}
+#password_container{
+    margin-bottom: 7px;
+}
+#sexe_container, #username_container input, #password_container input , 
+        #confirm_password_container input, #email_container input{
+    padding-left: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    width: 100%;
+    height: 25px;
+    font-size: 15px;
+    color: white;
+    border: 1px solid rgb(177, 164, 164);
+    border-radius: 15px;
+    background: transparent;
+}
+input:hover{
+    cursor: pointer;
+}
+#password_container input::placeholder, #username_container input::placeholder, 
+        #confirm_password_container input::placeholder, 
+        #email_container input::placeholder{
+    padding: 10px;
+    font-size: 12px;
+    color: rgb(255, 255, 255);
+}
+#username_container svg, #password_container svg, #confirm_password_container svg, #email_container svg{
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform:translateY(-50%);
+    color: black;
+}
+#FR_container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+#country,#role, #FR_container div,#FR_container a{
+    font-size: 12px;
+    color: white;
+    font-weight: 500;
+}
+a{
+    text-decoration: none;
+}
+#login__container a:hover, #register_container a:hover{
+    cursor: pointer;
+    text-decoration: underline;
+    color: rgb(29, 77, 119);
+}
+#button_login, #button_createaccount{
+    margin-top: 20px;
+    width: 100%;
+    font-size: medium;
+    font-weight: 700;
+    color: black;
+    padding: 10px 10px;
+    background-color: white;
+    border: 1px solid rgb(177, 164, 164);
+    border-radius: 20px;
+    transition: all 0.42s 0s;   
+}
+#button_login:hover, #button_createaccount:hover{
+    background-color: black;
+    color: white;
+    cursor: pointer;
+}
+#register_container, #login__container{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    column-gap: 10px;
+    margin-bottom: 15px;
+}
+#sexe_container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-content: space-between;
+    align-items: center;
+    column-gap: auto;
+    margin-bottom: 15px;
+}
+#sexe_container div{
+    margin-right: 20px;
+}
+#sexe_container, #register_container p, #register_container a, #login__container p, #login__container a{
+    font-size: 13px;
+    font-weight: 600;
+    color: white;
+}
+@keyframes down_animation{
+    0%{
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+    100%{
+        transform: translateY(0%);
+        opacity: 1;
+    }
+}
+svg:hover{
+    cursor: pointer;
+}
+
+@media screen and (max-width: 650px){
+    #container{
+        width: 80%;
+    }
+}
+select, input{
+    border: 0;
+    background: transparent;
+}
+#role{
+    margin: 20px 0;
+}

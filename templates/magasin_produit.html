@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='manager.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
+    <style>
+        .store {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            color: white;
+        }
+    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=arrow_forward" />
+    <title>Store Information</title>
+</head>
+<body>
+    
+    <div id="container1" class="store">
+        <h2>Store Information</h2>
+        <form id="myform1" action="/update_shop" method="POST">
+            <div id="email_container">
+                <input type="hidden" id="nomMag" name="idMag" placeholder="Name" value="{{ shop[1] }}" required>
+            </div>
+            <div id="email_container">
+                <label for="nomMag">Store Name</label>
+                <input type="text" id="nomMag" name="nomMag" placeholder="Name" value="{{ shop[2] }}" required>
+            </div>
+            <div id="email_container">
+                <label for="adresseMag">Store Address</label>
+                <input type="text" id="adresseMag" name="adresseMag" placeholder="Address" value="{{ shop[3] }}" required>
+            </div>
+            <div id="email_container">
+                <label for="telMag">Store Telephone</label>
+                <input type="tel" id="telMag" name="telMag" placeholder="Tel" value="{{ shop[4][1:] }}" required >
+            </div>
+            <div id="email_container">
+                <label for="nomGerant">Manager Name</label>
+                <input type="text" id="nomGerant" name="nomGerant" placeholder="Manager Name" value="{{ shop[5] }}" required>
+            </div>
+            <div id="email_container">
+                <label for="prenomGerant">Manager First Name</label>
+                <input type="text" id="prenomGerant" name="prenomGerant" placeholder="Manager First Name" value="{{ shop[6] }}" required>
+            </div>
+            <div id="email_container">
+                <label for="emailGerant">Manager Email</label>
+                <input type="email" id="emailGerant" name="emailGerant" placeholder="Email" value="{{ shop[7] }}" required>
+            </div>
+            <div id="email_container">
+                <label for="telGerant">Manager Telephone</label>
+                <input type="tel" id="telGerant" name="telGerant" placeholder="Manager Tel" value="{{ shop[8][1:] }}" required pattern="[0-9]{10,16}+" title="Please enter a valid phone number (10 to 16 digits).">
+            </div>
+        </form>
+    </div>
+    
+    <div class="product-grid">
+        {% for composant in products %}
+        <a href="/product_magasin_{{composant.idcomp}}_{{shop.idmag}}">
+            <div class="product-card">
+                <img src="{{ url_for('static', filename='keyboard.webp') }}" alt="Product icomposante" />
+                <h3>{{ composant.nomcomp }}</h3>
+                <p class="price_composant">{{composant.prixunit}}</p>
+                <p class="stock_composant">{{composant.stock}}</p>
+
+            </div>
+        </a>
+        {% endfor %}
+    </div>
+</body>
+</html>

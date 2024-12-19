@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='product.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='manager.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;700&display=swap" rel="stylesheet">
+    <title>Product Management</title>
+    <style>
+        #email_container {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 10px;
+            color: white;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px auto;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+        tr:nth-child(0) {
+            background-color: #f9f9f9;
+        }
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+        .available {
+            color: green;
+            font-weight: bold;
+        }
+        .not-available {
+            color: red;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    
+    <nav id="nav_bar">
+        <div id="container_logoprof">
+            <a href="{{url_for("client")}}">
+                <div id="magasin">
+                    <img src="{{ url_for('static', filename='MSI-Logo.png') }}" width="200" height="100" alt="MSI Logo" />
+                </div>
+            </a>
+        </div>
+        <form id="search_div" action='/search_product_magasin' method='GET'>
+            <input type="text" placeholder="Search for products..." name="product" id="product" />
+        </form>
+        <a href="/client_personnelle" id="profile_normal">
+                <div id="profile">
+                    <img src="{{ url_for('static', filename='client.png') }}" width="50" height="50" alt="Profile" />
+                </div>
+        </a>
+    </nav>
+    
+    <div id="container1">
+        <form id="myform1" ><!--action="/update_shop" method="POST"-->
+            <h1 id='login_title'>My project's products'</h1>
+            <table>
+                <thead>
+                    <tr>
+                        <th>idComp</th>
+                        <th>nomComp</th>
+                        <th>descriptionComp</th>
+                        <th>marqueComp</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for productproject in productprojects %}
+                    <tr>
+                        <td>{{ productproject.idcomp }}</td>
+                        <td>{{ productproject.nomcomp }}</td>
+                        <td>{{ productproject.descriptioncomp }}</td>
+                        <td>{{ productproject.marquecomp }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+                
+                
+            </table>
+            <a href="add_remove_component_{{idproj}}" style="text-align: center" id='button_login'>Modify</a>
+        </form>
+    </div>
+
+
+        <div id="container1">
+            <form id="myform1" ><!--action="/update_shop" method="POST"-->
+                <h1 id='login_title'>Shops that sell them</h1>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>idComp</th>
+                            <th>nomComp</th>
+                            <th>descriptionComp</th>
+                            <th>marqueComp</th>
+                            <th>idMag</th>
+                            <th>prixUnit</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for product in products %}
+                        <tr>
+                            <td>{{ product.idcomp }}</td>
+                            <td>{{ product.nomcomp }}</td>
+                            <td>{{ product.descriptioncomp }}</td>
+                            <td>{{ product.marquecomp }}</td>
+                            <td>{{ product.nommag }}</td>
+                            <td>{{ product.prixunit }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </form>
+        </div>
+        <form action="/removeproject" method='POST'>
+            <input type="hidden" name="idProj" value={{idproj}}>
+            <button id="button_login">Remove project</button>
+        </form>
+</body>
+</html>

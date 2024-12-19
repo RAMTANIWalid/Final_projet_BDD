@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='product.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='manager.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;700&display=swap" rel="stylesheet">
+    <title>Product Management</title>
+</head>
+<body>
+
+    
+    {%if session['role'] == "Manager"%}
+    <nav id="nav_bar">
+        <div id="container_logoprof">
+            <a href="{{url_for("manager")}}">
+                <div id="magasin">
+                    <img src="{{ url_for('static', filename='MSI-Logo.png') }}" width="200" height="100" alt="MSI Logo" />
+                </div>
+            </a>
+        </div>
+        <form id="search_div" action='/search_product' method='GET'>
+            <input type="text" placeholder="Search for products..." name="product" id="product" />
+        </form>
+        <div id="link_container">
+            <a href={{url_for("all_products")}} id="link_nav_bar">Products</a>
+            <a href="#container1" id="link_nav_bar">Add Product</a>
+            <a href="{{ url_for('employeshifts') }}" id="link_nav_bar">Employee Shifts</a>
+            <a href={{url_for("statistic")}} id="link_nav_bar">Summary and Statistics</a>
+            <a href="{{ url_for('shop') }}" id="profile_normal">
+                <div id="profile">
+                    <img src="{{ url_for('static', filename='MSI-Logo.png') }}" width="50" height="50" alt="Profile" />
+                </div>
+            </a>
+        </div>
+    </nav>
+    <div id="container1">
+        <div id="product-grid">
+            <form id="myform1" action="update_product" method="POST">
+                <h1 id="login_title">Product Information and Update</h1>
+                <img src="{{ url_for('static', filename='keyboard.webp') }}" alt="Sample Image" class="composant-image" id="composant_image">
+                <input type="hidden" name="product_id" value="{{ product[0] }}" >
+                <div id="email_container">
+                    <label for="product_name">Name</label>
+                    <input type="text" name="product_name" id="product_name" value="{{ product[1] }}" required >
+                </div>
+                <div id="email_container">
+                    <label for="product_brand">Brand</label>
+                    <input type="text" name="product_brand" id="product_brand" value="{{ product[2] }}" required >
+                </div>
+                <div id="email_container">
+                    <label for="product_description">Description</label>
+                    <textarea name="product_description" id="product_description" required >{{ product[3] }}</textarea>
+                </div>
+                <div id="email_container">
+                    <label for="product_price">Price</label>
+                    <input type="number" name="product_price" id="product_price" value="{{ product[4] }}" required>
+                </div>
+                <div id="email_container">
+                    <label for="product_price">Stock</label>
+                    <input type="number" name="product_stock" id="product_stock" value="{{ product[5] }}" required>
+                </div>
+                <button type="submit" id="button_login">Update</button>
+            </form>
+        </div>
+    </div>
+    <div id="container1">
+        <form id="myform" action="/remove_product" method="GET">
+            <h1 id="login_title">Product Suppression</h1>
+            <input type="hidden" name="product_id" value="{{ product[0] }}">
+            <button type="submit" id="button_login">Remove</button>
+        </form>
+    </div>
+    {%elif session['role'] == "Employe"%}
+    <nav id="nav_bar">
+        <div id="container_logoprof">
+            <a href="{{url_for("employe")}}">
+                <div id="magasin">
+                    <img src="{{ url_for('static', filename='MSI-Logo.png') }}" width="200" height="100" alt="MSI Logo" />
+                </div>
+            </a>
+        </div>
+        <a href="{{ url_for('employe_personelle') }}" id="profile_normal">
+                <div id="profile">
+                    <img src="{{ url_for('static', filename='MSI-Logo.png') }}" width="50" height="50" alt="Profile" />
+                </div>
+            </a>
+        </div>
+    </nav>
+    <div id="container1">
+        <div id="product-grid">
+            <form id="myform1" action="update_product" method="POST">
+                <h1 id="login_title">Product Information and Update</h1>
+                <img src="{{ url_for('static', filename='keyboard.webp') }}" alt="Sample Image" class="composant-image" id="composant_image">
+                <input type="text" name="product_id" value="{{ product[0] }}" disabled>
+                <div id="email_container">
+                    <label for="product_name">Name</label>
+                    <input type="text" name="product_name" id="product_name" value="{{ product[1] }}" required disabled>
+                </div>
+                <div id="email_container">
+                    <label for="product_brand">Brand</label>
+                    <input type="text" name="product_brand" id="product_brand" value="{{ product[2] }}" required disabled>
+                </div>
+                <div id="email_container">
+                    <label for="product_description">Description</label>
+                    <textarea name="product_description" id="product_description" required disabled>{{ product[3] }}</textarea>
+                </div>
+                <div id="email_container">
+                    <label for="product_price">Price</label>
+                    <input type="number" name="product_price" id="product_price" value="{{ product[4] }}" required disabled>
+                </div>
+                <div id="email_container">
+                    <label for="product_price">Quantite</label>
+                    <input type="number" name="product_stock" id="product_stock" value="{{ product[5] }}" required disabled>
+                </div>
+            </form>
+        </div>
+    </div>
+    {%else%}
+    <nav id="nav_bar">
+        <div id="container_logoprof">
+            <a href="{{url_for("client")}}">
+                <div id="magasin">
+                    <img src="{{ url_for('static', filename='MSI-Logo.png') }}" width="200" height="100" alt="MSI Logo" />
+                </div>
+            </a>
+        </div>
+        <form id="search_div" action='/search_product_magasin' method='GET'>
+            <input type="text" placeholder="Search for products..." name="product" id="product" />
+        </form>
+        <a href="/client_personnelle" id="profile_normal">
+                <div id="profile">
+                    <img src="{{ url_for('static', filename='client.png') }}" width="50" height="50" alt="Profile" />
+                </div>
+        </a>
+    </nav>
+    
+    
+    <div id="container1">
+        <div id="product-grid">
+            <form id="myform1" action="update_product" method="POST">
+                <h1 id="login_title">Product Information and Update</h1>
+                <img src="{{ url_for('static', filename='keyboard.webp') }}" alt="Sample Image" class="composant-image" id="composant_image">
+                <input type="text" name="product_id" value="{{ product[0] }}" disabled>
+                <div id="email_container">
+                    <label for="product_name">Name</label>
+                    <input type="text" name="product_name" id="product_name" value="{{ product[1] }}" required disabled>
+                </div>
+                <div id="email_container">
+                    <label for="product_brand">Brand</label>
+                    <input type="text" name="product_brand" id="product_brand" value="{{ product[2] }}" required disabled>
+                </div>
+                <div id="email_container">
+                    <label for="product_description">Description</label>
+                    <textarea name="product_description" id="product_description" required disabled>{{ product[3] }}</textarea>
+                </div>
+                <div id="email_container">
+                    <label for="product_price">Price</label>
+                    <input type="number" name="product_price" id="product_price" value="{{ product[4] }}" required disabled>
+                </div>
+                <div id="email_container">
+                    <label for="product_price">Quantite</label>
+                    <input type="number" name="product_stock" id="product_stock" value="{{ product[5] }}" required disabled>
+                </div>
+            </form>
+        </div>
+    </div>
+    {%endif%}
+</body>
+</html>

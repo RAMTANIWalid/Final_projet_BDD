@@ -1,0 +1,26 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700&display=swap" rel="stylesheet">
+    <title>Welcome</title>
+</head>
+
+<body>
+<header id="container1" style="display: flex; flex-direction: column;">
+    <h1 style="text-align:center" id="login_title">Welcome</h1>
+    <p style="text-align: center;">
+        Welcome on our website! MSI is a company that sells computer hardware. <br>
+        If you want to take a look at our products, please click <a href="/catalogue"> here </a>!
+    </p>
+    <p style="text-align: center;">
+        Already signed up? <a href="/client_login"> log in </a>! Else, you can <a href="/client_register"> register </a>...
+    </p>
+</body>
+
+</html>

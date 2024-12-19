@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='product.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='manager.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;700&display=swap" rel="stylesheet">
+    <title>Product Management</title>
+    <style>
+        #email_container {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 10px;
+            color: white;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px auto;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+        tr:nth-child(0) {
+            background-color: #f9f9f9;
+        }
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+        .available {
+            color: green;
+            font-weight: bold;
+        }
+        .not-available {
+            color: red;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    
+    <nav id="nav_bar">
+        <div id="container_logoprof">
+            <a href="{{url_for("manager")}}">
+                <div id="magasin">
+                    <img src="{{ url_for('static', filename='MSI-Logo.png') }}" width="200" height="100" alt="MSI Logo" />
+                </div>
+            </a>
+        </div>
+        <form id="search_div" action='/search_product' method='GET'>
+            <input type="text" placeholder="Search for products..." name="product" id="product" />
+        </form>
+        <div id="link_container">
+            <a href={{url_for("all_products")}} id="link_nav_bar">Products</a>
+            <a href="#container1" id="link_nav_bar">Add Product</a>
+            <a href="{{ url_for('employeshifts') }}" id="link_nav_bar">Employee Shifts</a>
+            <a href={{url_for("statistic")}} id="link_nav_bar">Summary and Statistics</a>
+            <a href="{{ url_for('shop') }}" id="profile_normal">
+                <div id="profile">
+                    <img src="{{ url_for('static', filename='MSI-Logo.png') }}" width="50" height="50" alt="Profile" />
+                </div>
+            </a>
+        </div>
+    </nav>
+    <h1 id='login_title'>Shop statistique</h1>
+        <div id="container1">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Description</th>
+                            <th>brand</th>
+                            <th>number of product</th>
+                            <th>total price</th>
+                            
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for product in products %}
+                        <tr>
+                            <td>{{ product[0] }}</td>
+                            <td>{{ product[1] }}</td>
+                            <td>{{ product[2] }}</td>
+                            <td>{{ product[3] }}</td>
+                            <td>{{ product[4] }}</td>
+                            <td>{{product[5]}}</td>
+                            
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                    
+                </table>
+        </div>
+    </div>
+    <div>
+        <p>Number of bills : {{facture}}</p>
+        <p>Total price : {{total}}</p>
+    </div>
+</body>
+</html>

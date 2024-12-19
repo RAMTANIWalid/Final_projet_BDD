@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename = 'index.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    <title>Login</title>
+</head>
+<body>
+    <section id="container">
+        <form action="/login_account" id="myform1" method="POST">
+            <h1 id="login_title">Login</h1>
+            <div id="email_container">
+                <input type="email" placeholder="Email" id="email" name="Email">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: rgba(0, 0, 0, 1);"><path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 4.7-8 5.334L4 8.7V6.297l8 5.333 8-5.333V8.7z"></path></svg>
+            </div>
+            <div>
+                <span id="email_span"></span>
+            </div>
+            <div id="password_container">
+                <input type="password" placeholder="Password" id="password" name="Password" required>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: rgba(0, 0, 0, 1);"><path d="M20 12c0-1.103-.897-2-2-2h-1V7c0-2.757-2.243-5-5-5S7 4.243 7 7v3H6c-1.103 0-2 .897-2 2v8c0 1.103.897 2 2 2h12c1.103 0 2-.897 2-2v-8zM9 7c0-1.654 1.346-3 3-3s3 1.346 3 3v3H9V7z"></path></svg>
+            </div>
+            <div><span id="password_span"></span>
+            <div id="FR_container">
+                <div>
+                    <label><input type="checkbox" required>Agree</label>
+                </div>
+                <div>
+                    <a href="">Forgot password?</a>
+                </div>
+            </div>
+            <div id="role">
+                <label for="Employe">Employe</label>
+                <input type="radio" value="Employe" id="employe" name="Role" >
+            </div>
+            <div id="">
+                <label for="shop">Shop</label>
+                <input type="number" value=0 id="shop" name="shop" >
+            </div>
+            <button id="button_login" type="submit">Login</button>
+            <div id="register_container">
+                <p>Don't have an account</p>
+                <a href="/employe_register">Register</a>
+            </div>
+        </form>
+    </section>
+    <a href="/" style="position: absolute;top:10px;left:auto; right: auto;">Acceuil</a>
+
+    <script>
+        const promise = new Promise((resolve, reject)=>{
+            setTimeout(()=>{
+                const container = document.getElementById("container");
+                container.style.animation = 'down_animation';
+                container.style.animationDuration = "1.5s";
+                container.style.opacity = 1;
+            }, 1000);
+        }).then(()=>{
+            console.log("accomplished");
+        });
+        const span_style = function(span, message, color="red"){
+            span.innerHTML = message;
+            span.style.color = color;
+            span.style.marginLeft = "10px";
+            span.style.marginBottom = "10px";
+            span.style.textAlign = "center";
+            span.style.fontSize = "15px";
+            span.style.fontWeight = 500
+        }
+        const myform = document.getElementById("myform1");
+        myform.addEventListener("submit", (event)=>{
+            // check for email
+            let my_regex_email = /^[a-zA-Z0-9@-_.]+$/;
+            let email = document.getElementById("email");
+            if(email.value == ""){
+                let email_span = document.getElementById('email_span');
+                span_style(email_span, "the email field is required");
+                event.preventDefault();
+            }
+            else{
+                    let email_span = document.getElementById("email_span");
+                    span_style(email_span, "The email is valid", "Green");
+                }
+            // check password
+            let password = document.getElementById("password");
+            let my_regex_password = /^[a-zA-Z0-9#@-_/]+$/;
+            if(password.value == ""){
+                let password_span = document.getElementById("password_span");
+                span_style(password_span, "The password field is required");
+                event.preventDefault();
+            }
+                    else{
+                        let password_span = document.getElementById('password_span');
+                        span_style(password_span, "The password is valid", "Green");
+                    }
+                    
+        })
+    </script>
+</body>
+</html>

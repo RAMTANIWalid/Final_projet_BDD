@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static', filename='index.css')}}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='product.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='manager.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;700&display=swap" rel="stylesheet">
+    
+    <title>Registration</title>
+</head>
+<body>
+    <nav id="nav_bar">
+        <div id="container_logoprof">
+            <a href="{{url_for("client")}}">
+                <div id="magasin">
+                    <img src="{{ url_for('static', filename='MSI-Logo.png') }}" width="200" height="100" alt="MSI Logo" />
+                </div>
+            </a>
+        </div>
+        <form id="search_div" action='/search_product_magasin' method='GET'>
+            <input type="text" placeholder="Search for products..." name="product" id="product" />
+        </form>
+        <a href="/client_personnelle" id="profile_normal">
+                <div id="profile">
+                    <img src="{{ url_for('static', filename='client.png') }}" width="50" height="50" alt="Profile" />
+                </div>
+        </a>
+    </nav>
+    
+    
+    <main id="">
+        <form action="/addcomponent" id="myform" method="POST">
+            <h1 id="login_title">Add component</h1>
+            <input type="number" value="" id="" name="idComp" placeholder="idComp" min=1>
+            <input type="number" value= id="" name="quantite" min=1  placeholder="quantite">
+            <input type="hidden" value={{idProj}} id="" name="idProj">
+            <button id="button_login">Add</button>
+        </form>
+    </main>
+
+    <main id="">
+        <form action="/removecomponent" id="myform" method="POST">
+            <h1 id="login_title">remove component</h1>
+            <input type="number" value="" id="" name="idComp" min=1  placeholder="idComp">
+            <input type="hidden" value={{idProj}} id="" name="idProj">       
+            <button id="button_login">Remove</button>
+
+        </form>
+    </main>
+</body>
+</html>

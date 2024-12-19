@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='manager.css') }}">
+    <title>Error Page</title>
+    <style>
+        /* Main container for the body */
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        /* Container for content */
+        #contain {
+            opacity: 1;
+            width: 70%;
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: transparent;
+            backdrop-filter: blur(10px);
+            box-shadow: -3px -3px 10px rgba(29, 27, 27, 0.3);
+            border-radius: 20px;
+            text-align: center;
+        }
+
+        /* Title style */
+        #login_title {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        /* List styling for flash messages */
+        ul {
+            font-size: 20px;
+            font-weight: bold;
+            color: red;
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        /* Message text styling */
+        .message {
+            font-size: 1.2em;
+            color: #333;
+            margin-top: 20px;
+        }
+
+        /* Return button styling */
+        .return-btn {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 1em;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        /* Return button hover effect */
+        .return-btn:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div id="contain">
+        <!-- Error page title -->
+        <h1 id="login_title">Error Page</h1>
+        
+        <!-- Flash messages -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <ul>
+                    {% for category, message in messages %}
+                        <li class="{{ category }}">{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+        
+        <!-- Information and action after message -->
+        <p class="message">Please return to the previous page!</p>
+        
+        <!-- Return button to navigate back -->
+        <button class="return-btn" onclick="window.history.back();">Go Back</button>
+    </div>
+</body>
+</html>

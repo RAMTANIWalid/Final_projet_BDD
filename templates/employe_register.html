@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static', filename='index.css')}}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    <title>Registration</title>
+</head>
+<body>
+    <section id="container">
+        <form action="/create_new_account" id="myform" method="POST">
+            <h1 id="login_title">Register</h1>
+            <div id="username_container">
+                <input type="text" placeholder="Firstname" id="firstname" name="Firstname">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: rgba(0, 0, 0, 1);"><path d="M7.5 6.5C7.5 8.981 9.519 11 12 11s4.5-2.019 4.5-4.5S14.481 2 12 2 7.5 4.019 7.5 6.5zM20 21h1v-1c0-3.859-3.141-7-7-7h-4c-3.86 0-7 3.141-7 7v1h17z"></path></svg>
+            </div>
+            <div><span id="firstname_span"></span></div>
+            <div id="username_container">
+                <input type="text" placeholder="Name" id="name" name="Name">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: rgba(0, 0, 0, 1);"><path d="M7.5 6.5C7.5 8.981 9.519 11 12 11s4.5-2.019 4.5-4.5S14.481 2 12 2 7.5 4.019 7.5 6.5zM20 21h1v-1c0-3.859-3.141-7-7-7h-4c-3.86 0-7 3.141-7 7v1h17z"></path></svg>
+            </div>
+            <div><span id="name_span"></span></div>
+            
+            <div id="sexe_container">
+                <div>
+                    <label for="male">Male</label>
+                    <input type="radio" id="male" name="Sexe" value="M">
+                </div>
+                <div>
+                    <label for="female">Female</label>
+                    <input type="radio" id="female" name="Sexe" value="F">  
+                </div>
+
+                  
+            </div>
+            <div id="username_container">
+                <select id="country" name="Country" required>
+                    <option value="">--Select a Country--</option>
+
+                    <option value="+33">France (+33)</option>
+
+                    <option value="+32">Belgium (+32)</option>
+
+                    <option value="+1">Canada (+1)</option>
+
+                    <option value="+1">United States (+1)</option>
+
+                    <option value="+44">United Kingdom (+44)</option>
+
+                    <option value="+49">Germany (+49)</option>
+
+                    <option value="+41">Switzerland (+41)</option>
+
+                    <option value="+61">Australia (+61)</option>
+
+                    <option value="+212">Morocco (+212)</option>
+
+                </select>
+             </div>
+            <div id="username_container">
+                <input type="tel" placeholder="Phone number" id="tel" name="Phone">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: rgba(0, 0, 0, 1);"><path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 4.7-8 5.334L4 8.7V6.297l8 5.333 8-5.333V8.7z"></path></svg>
+            </div>
+            <div id="role">
+                <label for="Employe">Employe</label>
+                <input type="radio" value="Employe" id="employe" name="Role" >
+            </div>
+            <div id="email_container">
+                <input type="email" placeholder="Email" id="email" name="Email">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: rgba(0, 0, 0, 1);"><path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 4.7-8 5.334L4 8.7V6.297l8 5.333 8-5.333V8.7z"></path></svg>
+            </div>
+            <div>
+                <span id="email_span"></span>
+            </div>
+            <div id="password_container">
+                <input type="password" placeholder="Password" id="password" name="Password">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: rgba(0, 0, 0, 1);"><path d="M20 12c0-1.103-.897-2-2-2h-1V7c0-2.757-2.243-5-5-5S7 4.243 7 7v3H6c-1.103 0-2 .897-2 2v8c0 1.103.897 2 2 2h12c1.103 0 2-.897 2-2v-8zM9 7c0-1.654 1.346-3 3-3s3 1.346 3 3v3H9V7z"></path></svg>
+            </div>
+            <div><span id="password_span"></span></div>
+            <div id="confirm_password_container">
+                <input type="password" placeholder="Confirm Password" id="confirm_password" name="confirmpassword">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: rgba(0, 0, 0, 1);"><path d="M20 12c0-1.103-.897-2-2-2h-1V7c0-2.757-2.243-5-5-5S7 4.243 7 7v3H6c-1.103 0-2 .897-2 2v8c0 1.103.897 2 2 2h12c1.103 0 2-.897 2-2v-8zM9 7c0-1.654 1.346-3 3-3s3 1.346 3 3v3H9V7z"></path></svg>
+            </div>
+            <div><span id="confirm_password_span"></span></div>
+            <button id="button_createaccount" type="submit">Create account</button>
+            <div id="login__container">
+                <p>Already have an account</p>
+                <a href="/employe_login">Register</a>
+            </div>
+        </form>
+    </section>
+    <script>
+        const promise = new Promise((resolve, reject)=>{
+            setTimeout(()=>{
+                const container = document.getElementById("container");
+                container.style.animation = 'down_animation';
+                container.style.animationDuration = "1.5s";
+                container.style.opacity = 1;
+            }, 1000);
+        }).then(()=>{
+            console.log("accomplished");
+        });
+        const span_style = function(span, message, color="red"){
+            span.innerHTML = message;
+            span.style.color = color;
+            span.style.marginLeft = "10px";
+            span.style.marginBottom = "10px";
+            span.style.textAlign = "center";
+            span.style.fontSize = "15px";
+            span.style.fontWeight = 500
+        }
+        const myform = document.getElementById("myform");
+        myform.addEventListener("submit", (event)=>{
+            let username = document.getElementById('name');
+            let my_regex = /^[a-zA-Z-0-9_]+$/;
+            // check for name
+            if(username.value == ""){
+                let username_span = document.getElementById('name_span');
+                span_style(username_span, "the name field is required");
+                event.preventDefault();
+            }
+            else{
+                let username_span = document.getElementById('name_span');
+                span_style(username_span, "The name is valid", "Green");
+            }
+
+            let firstname = document.getElementById('firstname');
+            // check for firstname
+            if(firstname.value == ""){
+                let firstname_span = document.getElementById('firstname_span');
+                span_style(firstname_span, "the firstname field is required");
+                event.preventDefault();
+            }
+            else{
+                let firstname_span = document.getElementById('firstname_span');
+                span_style(firstname_span, "The firstname is valid", "Green");
+            }
+            // check for email
+            let my_regex_email = /^[a-zA-Z0-9@-_.]+$/;
+            let email = document.getElementById('email');
+            if(email.value == ""){
+                let email_span = document.getElementById('email_span');
+                span_style(email_span, "the email field is required");
+                event.preventDefault();
+            }
+            else if(my_regex_email.test(email.value) == false){
+                let email_span = document.getElementById('email_span');
+                span_style(email_span, "the email contain only letters, numbers and dashes");
+                event.preventDefault();
+            }
+            else{
+                    let email_span = document.getElementById('email_span');
+                    span_style(email_span, "The email is valid", "Green");
+                }
+            // check password
+            let password = document.getElementById("password");
+            let my_regex_password = /^[a-zA-Z0-9#@-_/]+$/;
+            if(password.value == ""){
+                let password_span = document.getElementById("password_span");
+                span_style(password_span, "The password field is required");
+                event.preventDefault();
+            }
+            else if(password.value.length < 8){
+                let password_span = document.getElementById("password_span");
+                span_style(password_span, "The password length must be greater than 8 caracters");
+                event.preventDefault();
+            }
+                    else{
+                        let password_span = document.getElementById('password_span');
+                        span_style(password_span, "The password is valid", "Green");
+                    }
+            // confirm password
+            let confirm_password = document.getElementById("confirm_password");
+            let confirm_password_span = document.getElementById("confirm_password_span");
+            if(confirm_password.value == password.value && confirm_password.value != ""){
+                span_style(confirm_password_span, "The password is correct", "Green")
+            }else{
+                span_style(confirm_password_span, "The password is not confirmed")
+                event.preventDefault();
+            }
+                    
+        })
+    </script>
+</body>
+</html>

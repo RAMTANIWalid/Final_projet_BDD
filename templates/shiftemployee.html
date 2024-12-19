@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='product.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='manager.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;700&display=swap" rel="stylesheet">
+    <title>Product Management</title>
+    <style>
+        #email_container {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 10px;
+            color: white;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px auto;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+        tr:nth-child(0) {
+            background-color: #f9f9f9;
+        }
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+        .available {
+            color: green;
+            font-weight: bold;
+        }
+        .not-available {
+            color: red;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    
+    <nav id="nav_bar">
+        <div id="container_logoprof">
+            <a href="{{url_for("manager")}}">
+                <div id="magasin">
+                    <img src="{{ url_for('static', filename='MSI-Logo.png') }}" width="200" height="100" alt="MSI Logo" />
+                </div>
+            </a>
+        </div>
+        <form id="search_div" action='/search_product' method='GET'>
+            <input type="text" placeholder="Search for products..." name="product" id="product" />
+        </form>
+        <div id="link_container">
+            <a href={{url_for("all_products")}} id="link_nav_bar">Products</a>
+            <a href="#container1" id="link_nav_bar">Add Product</a>
+            <a href="{{ url_for('employeshifts') }}" id="link_nav_bar">Employee Shifts</a>
+            <a href={{url_for("statistic")}} id="link_nav_bar">Summary and Statistics</a>
+            <a href="{{ url_for('shop') }}" id="profile_normal">
+                <div id="profile">
+                    <img src="{{ url_for('static', filename='MSI-Logo.png') }}" width="50" height="50" alt="Profile" />
+                </div>
+            </a>
+        </div>
+    </nav>
+    
+        <div id="container1">
+            <form id="myform1" ><!--action="/update_shop" method="POST"-->
+                <h1 id='login_title'>Employe shifts</h1>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Last Name</th>
+                            <th>First Name</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                            <th>Day</th>
+                            <th>Work the</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for shift in shifts %}
+                        <tr>
+                            <td>{{ shift[0] }}</td>
+                            <td>{{ shift[1] }}</td>
+                            <td>{{ shift[2] }}</td>
+                            <td>{{ shift[3] }}</td>
+                            <td>{{ shift[4] }}</td>
+                            <td>
+                                {% for day in shift[5] %}
+                                    {{ day }}{% if not loop.last %}, {% endif %}
+                                {% endfor %}
+                            </td>
+                            <td>
+                                {% for employe in available %}
+                                    {% if employe[0] == shift[0] %}
+                                        {% for day in employe[5] %}
+                                            {{ day }}
+                                        {% endfor %}
+                                    {% endif %}
+                                {% endfor %}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                    
+                </table>
+            </form>
+        </div>
+
+        <div id="container1">
+            <form method="POST" action="/add_work_days">
+                <h1>Add shifts</h1>
+                <div id='email_container'>
+                    <input type="number" id="emailGerant" name="idEmp" placeholder="ID" value="" required>
+                </div>
+                <div id='email_container'>
+                    <label for="sunday">Dimanche</label>
+                    <input type="checkbox" name="days" value="Dimanche">
+                </div>
+                <div id='email_container'>
+                    <label for="monday">Lundi</label>
+                    <input type="checkbox" name="days" value="Lundi">
+                    
+                </div>
+                <div id='email_container'>
+                    <label for="tuesday">Mardi</label>
+                    <input type="checkbox" name="days" value="Mardi">
+                    
+                </div>
+                <div id='email_container'>
+
+                    <label for="wednesday">Mercredi</label>
+                    <input type="checkbox" name="days" value="Mercredi">
+                    
+                </div>
+                <div id='email_container'>
+
+                    <label for="thursday">Jeudi</label>
+                    <input type="checkbox" name="days" value="Jeudi">
+                    
+                </div>
+                <div id='email_container'>
+
+                    <label for="friday">Vendredi</label>
+                    <input type="checkbox" name="days" value="Vendredi">
+                    
+                </div>
+                <div id='email_container'>
+
+                    <label for="saturday">Samedi</label>
+                    <input type="checkbox" name="days" value="Samedi">
+                    
+                </div>
+                
+                
+               
+                <button type="submit" id='button_login'>update</button>
+            </form>
+            
+        </div>
+        <div id="container1">
+            <form method="POST" action="/remove_work_days">
+                <h1>Remove shifts</h1>
+                <div id='email_container'>
+                    <input type="number" id="emailGerant" name="idEmp" placeholder="ID" value="" required>
+                </div>
+                <div id='email_container'>
+                    <label for="sunday">Dimanche</label>
+                    <input type="checkbox" name="days" value="Dimanche">
+                </div>
+                <div id='email_container'>
+                    <label for="monday">Lundi</label>
+                    <input type="checkbox" name="days" value="Lundi">
+                    
+                </div>
+                <div id='email_container'>
+                    <label for="tuesday">Mardi</label>
+                    <input type="checkbox" name="days" value="Mardi">
+                    
+                </div>
+                <div id='email_container'>
+
+                    <label for="wednesday">Mercredi</label>
+                    <input type="checkbox" name="days" value="Mercredi">
+                    
+                </div>
+                <div id='email_container'>
+
+                    <label for="thursday">Jeudi</label>
+                    <input type="checkbox" name="days" value="Jeudi">
+                    
+                </div>
+                <div id='email_container'>
+
+                    <label for="friday">Vendredi</label>
+                    <input type="checkbox" name="days" value="Vendredi">
+                    
+                </div>
+                <div id='email_container'>
+
+                    <label for="saturday">Samedi</label>
+                    <input type="checkbox" name="days" value="Samedi">
+                    
+                </div>
+                
+                
+               
+                <button type="submit" id='button_login'>Remove</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
